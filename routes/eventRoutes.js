@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-// Un array de objetos para almacenar la información
-const programmingData = [];
+const db = require('../db');
 
 // Ruta para obtener todos los elementos
 router.get('/', (req, res) => {
-    return res.json(programmingData);
+    db.query('SELECT * FROM eventos', (error, results, fields) => {
+        if (error) {
+            console.error('Error al ejecutar la consulta:', error);
+            return;
+        }
+        return res.status(200).json(results);
+    });
 });
 
 
@@ -14,22 +19,36 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const itemId = req.params.id;
 
-    // Encuentra el elemento en el array por su ID
-    const item = programmingData.find(item => item.id === itemId);
-
-    if (item) {
-        return res.json(item);
-    } else {
-        return res.status(404).json({ error: 'Elemento no encontrado' });
-    }
+    db.query('SELECT * FROM eventos WHERE id = ?', [itemId], (error, results, fields) => {
+        if (error) {
+            console.error('Error al ejecutar la consulta:', error);
+            res.status(500).json({ error: 'Error en la consulta a la base de datos' });
+        } else {
+            console.log('Resultados de la consulta:', results);
+            if (results.length === 0) {
+                res.status(404).json({ error: 'Evento no encontrado' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    });
 });
 
 
 // Ruta para crear un nuevo elemento
 router.post('/', (req, res) => {
     const newItem = req.body;
-    programmingData.push(newItem);
-    return res.json(newItem);
+
+    // Realiza la inserción de datos en la base de datos
+    db.query('INSERT INTO eventos SET ?', newItem, (error, results, fields) => {
+        if (error) {
+            console.error('Error al insertar los datos:', error);
+            res.status(500).json({ error: 'Error al insertar los datos en la base de datos' });
+        } else {
+            console.log('Datos insertados con éxito.');
+            res.status(201).json({ message: 'Datos insertados con éxito' });
+        }
+    });
 });
 
 // Ruta para actualizar un elemento por ID
@@ -37,27 +56,34 @@ router.put('/:id', (req, res) => {
     const itemId = req.params.id;
     const updatedItem = req.body;
 
-    // Encuentra y actualiza el elemento en el array
-    for (let i = 0; i < programmingData.length; i++) {
-        if (programmingData[i].id === itemId) {
-            programmingData[i] = { ...programmingData[i], ...updatedItem };
-            return res.json(programmingData[i]);
+    // Realiza la actualización de datos en la base de datos
+    db.query('UPDATE eventos SET ? WHERE id = ?', [updatedItem, itemId], (error, results, fields) => {
+        if (error) {
+            console.error('Error al actualizar los datos:', error);
+            res.status(500).json({ error: 'Error al actualizar los datos en la base de datos' });
+        } else {
+            console.log('Datos actualizados con éxito.');
+            res.status(200).json({ message: 'Datos actualizados con éxito' });
         }
-    }
-
-    return res.status(404).json({ error: 'Elemento no encontrado' });
+    });
 });
+
 
 // Ruta para eliminar un elemento por ID
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    const indice = programmingData.findIndex(event => event.id == id);
-    if (indice >= 0) {
-        programmingData.splice(indice, 1);
-        return res.send("Elemento Eliminado");
-    } else {
-        return res.send("The index doesn't exist");
-    }
+
+    // Realiza la eliminación del recurso en la base de datos
+    db.query('DELETE FROM eventos WHERE id = ?', [id], (error, results, fields) => {
+        if (error) {
+            console.error('Error al eliminar el recurso:', error);
+            res.status(500).json({ error: 'Error al eliminar el recurso en la base de datos' });
+        } else {
+            console.log('Recurso eliminado con éxito.');
+            res.status(200).json({ message: 'Recurso eliminado con éxito' });
+        }
+    });
 });
+
 
 module.exports = router;
