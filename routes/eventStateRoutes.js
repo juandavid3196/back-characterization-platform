@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const itemId = req.params.id;
 
-    db.query('SELECT * FROM eventstates WHERE id = ?', [itemId], (error, results, fields) => {
+    db.query('SELECT * FROM eventstates WHERE event_id = ?', [itemId], (error, results, fields) => {
         if (error) {
             console.error('Error al ejecutar la consulta:', error);
             res.status(500).json({ error: 'Error en la consulta a la base de datos' });
@@ -57,7 +57,7 @@ router.put('/:id', (req, res) => {
     const updatedItem = req.body;
 
     // Realiza la actualización de datos en la base de datos
-    db.query('UPDATE eventstates SET ? WHERE id = ?', [updatedItem, itemId], (error, results, fields) => {
+    db.query('UPDATE eventstates SET ? WHERE id_state = ?', [updatedItem, itemId], (error, results, fields) => {
         if (error) {
             console.error('Error al actualizar los datos:', error);
             res.status(500).json({ error: 'Error al actualizar los datos en la base de datos' });
@@ -74,7 +74,7 @@ router.delete('/:id', (req, res) => {
     const id = req.params.id;
 
     // Realiza la eliminación del recurso en la base de datos
-    db.query('DELETE FROM eventstates WHERE id = ?', [id], (error, results, fields) => {
+    db.query('DELETE FROM eventstates WHERE id_state = ?', [id], (error, results, fields) => {
         if (error) {
             console.error('Error al eliminar el recurso:', error);
             res.status(500).json({ error: 'Error al eliminar el recurso en la base de datos' });

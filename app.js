@@ -10,11 +10,13 @@ const eventRoutes = require('./routes/eventRoutes');
 const subeventRoutes = require('./routes/subeventRoutes');
 const evenStateRoutes = require('./routes/eventStateRoutes');
 const subEvenStateRoutes = require('./routes/subEventStateRoutes');
+const historyEventRoutes = require('./routes/historyEventRoutes');
 
 app.use('/subevent', subeventRoutes);
 app.use('/event', eventRoutes);
 app.use('/eventstate', evenStateRoutes);
 app.use('/subeventstate', subEvenStateRoutes);
+app.use('/historyevent', historyEventRoutes);
 
 
 app.get('/', (req, res) => {
