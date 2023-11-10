@@ -9,7 +9,7 @@ const db = require('../db');
 router.get('/:id', (req, res) => {
     const itemId = req.params.id;
 
-    db.query('SELECT * FROM historysubeventstates WHERE eventstate_id = ?', [itemId], (error, results, fields) => {
+    db.query('SELECT * FROM historysubeventstates WHERE subeventstate_id = ?', [itemId], (error, results, fields) => {
         if (error) {
             console.error('Error al ejecutar la consulta:', error);
             res.status(500).json({ error: 'Error en la consulta a la base de datos' });
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
             if (results.length === 0) {
                 res.status(404).json({ error: 'Evento no encontrado' });
             } else {
-                res.status(200).json(results[0]);
+                res.status(200).json(results);
             }
         }
     });
