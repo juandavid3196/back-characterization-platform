@@ -35,6 +35,7 @@ router.get('/:id', (req, res) => {
 });
 
 
+
 // Ruta para crear un nuevo elemento
 router.post('/', (req, res) => {
     const newItem = req.body;

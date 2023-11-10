@@ -3,7 +3,7 @@ const router = express.Router();
 
 const db = require('../db');
 
-// Ruta para obtener todos los elementos
+//Ruta para obtener todos los elementos
 router.get('/', (req, res) => {
     db.query('SELECT * FROM eventos', (error, results, fields) => {
         if (error) {
@@ -33,6 +33,8 @@ router.get('/:id', (req, res) => {
         }
     });
 });
+
+
 
 
 // Ruta para crear un nuevo elemento
