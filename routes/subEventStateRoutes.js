@@ -69,21 +69,6 @@ router.put('/:id', (req, res) => {
 });
 
 
-// Ruta para eliminar un elemento por ID
-router.delete('/:id', (req, res) => {
-    const id = req.params.id;
-
-    // Realiza la eliminación del recurso en la base de datos
-    db.query('DELETE FROM subeventstates WHERE id_state = ?', [id], (error, results, fields) => {
-        if (error) {
-            console.error('Error al eliminar el recurso:', error);
-            res.status(500).json({ error: 'Error al eliminar el recurso en la base de datos' });
-        } else {
-            console.log('Recurso eliminado con éxito.');
-            res.status(200).json({ message: 'Recurso eliminado con éxito' });
-        }
-    });
-});
 
 
 module.exports = router;

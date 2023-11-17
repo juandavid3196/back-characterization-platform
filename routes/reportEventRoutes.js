@@ -6,6 +6,7 @@ const db = require('../db');
 router.get('/', (req, res) => {
     db.query(`SELECT
         e.general_name,
+        e.event_type,
         e.date_start,
         e.date_finishing,
         e.place,
@@ -16,6 +17,7 @@ router.get('/', (req, res) => {
     UNION
     SELECT
      se.specific_name,
+     se.event_type,
         se.date_start,
         se.date_finishing,
         se.place,
