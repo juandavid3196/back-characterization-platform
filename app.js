@@ -16,6 +16,7 @@ const reportEventRoutes = require('./routes/reportEventRoutes');
 
 ///////
 const stateRoutes = require('./routes/stateRoutes');
+const placeRoutes = require('./routes/placeRoutes');
 
 
 
@@ -29,6 +30,7 @@ app.use('/report', reportEventRoutes);
 
 ///////////////
 app.use('/state', stateRoutes);
+app.use('/place', placeRoutes);
 
 app.get('/', (req, res) => {
   return res.send('Bienvenido de nuevo');
