@@ -14,6 +14,11 @@ const historyEventRoutes = require('./routes/historyEventRoutes');
 const historySubeventRoutes = require('./routes/historySubeventRoutes');
 const reportEventRoutes = require('./routes/reportEventRoutes');
 
+///////
+const stateRoutes = require('./routes/stateRoutes');
+
+
+
 app.use('/subevent', subeventRoutes);
 app.use('/event', eventRoutes);
 app.use('/eventstate', evenStateRoutes);
@@ -22,6 +27,8 @@ app.use('/historyevent', historyEventRoutes);
 app.use('/historysubevent', historySubeventRoutes);
 app.use('/report', reportEventRoutes);
 
+///////////////
+app.use('/state', stateRoutes);
 
 app.get('/', (req, res) => {
   return res.send('Bienvenido de nuevo');
