@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 // Ruta para crear un nuevo elemento
 router.post('/', (req, res) => {
     const newBank = req.body;
-    banks = newBank;
+    banks.push(newBank);
     res.status(201).json({ message: 'pregunta creada con éxito', bank: newBank });
 });
 
@@ -20,9 +20,8 @@ router.post('/', (req, res) => {
 
 // Ruta para eliminar un elemento por ID
 router.delete('/:id', (req, res) => {
-    const itemId = parseInt(req.params.id);
+    const itemId = req.params.id;
     const index = banks.findIndex(s => s.id === itemId);
-
     if (index === -1) {
         res.status(404).json({ error: 'pregunta no encontrada' });
     } else {

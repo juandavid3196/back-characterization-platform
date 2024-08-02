@@ -25,9 +25,11 @@ app.use(express.json());
 const surveyRoutes = require('./routes/surveyRoutes');
 const bankRoutes = require('./routes/bankRoutes');
 const questionRoutes = require('./routes/questionRoutes');
+const userRoutes = require('./routes/userRoutes');
 app.use('/survey', surveyRoutes);
 app.use('/bank', bankRoutes);
 app.use('/question', questionRoutes);
+app.use('/user', userRoutes);
 
 
 
