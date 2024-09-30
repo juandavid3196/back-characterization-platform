@@ -26,3 +26,5 @@ app.get('/', (req, res) => {
   return res.send('Bienvenido de nuevo');
 });
 
+// Exportar la aplicación como un handler de Vercel
+module.exports = app;
