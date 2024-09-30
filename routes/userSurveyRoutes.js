@@ -7,24 +7,12 @@ const surveys =  [
         "title": "Encuesta de satisfacción del cliente",
         "questions":[],
         "description": "Encuesta para medir la satisfacción de nuestros clientes sobre los servicios prestados.",
-        "state": "Terminada",
+        "state": "Finalizada",
         "date_creation": "04/09/2020",
         "created_by": 101,
         "updated_date": "2023-06-10T15:00:00Z",
         "updated_by": "admin"
     },
-    {
-        "id": "2",
-        "title": "Encuesta de salud laboral",
-        "questions":[],
-        "description": "Encuesta para evaluar la salud y el bienestar de los empleados en el lugar de trabajo.",
-        "state": "Sin Resolver",
-        "date_creation": "07/12/1996",
-        "created_by": 102,
-        "updated_date": "2023-06-05T12:00:00Z",
-        "updated_by": "hr_manager"
-    },
-   
 ]
 
 // Ruta para obtener todos los elementos
