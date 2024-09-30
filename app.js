@@ -26,7 +26,3 @@ app.get('/', (req, res) => {
   return res.send('Bienvenido de nuevo');
 });
 
-
-app.listen(5000, () => {
-  console.log('server working!');
-})
